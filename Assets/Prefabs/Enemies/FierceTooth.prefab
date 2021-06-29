@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3cfb504a71f2d4d99e6040ea1c726b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <rase>k__BackingField: 2
   damage: 3
 --- !u!114 &1878207301215401320
 MonoBehaviour:

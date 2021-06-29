@@ -18,14 +18,14 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        playerMover.Move += OnPlayerMove;
-        playerMover.Stay += OnPlayerStay;
+        playerMover.OnMove += OnPlayerMove;
+        playerMover.OnStay += OnPlayerStay;
     }
 
     private void OnDisable()
     {
-        playerMover.Move -= OnPlayerMove;
-        playerMover.Stay -= OnPlayerStay;
+        playerMover.OnMove -= OnPlayerMove;
+        playerMover.OnStay -= OnPlayerStay;
 
     }
     private void OnPlayerMove()

@@ -18,7 +18,7 @@ public class Heart : MonoBehaviour
 
     public void Init()
     {
-        StartCoroutine(InitAnimation(lerpDuration,AfterInit));
+        StartCoroutine(InitAnimation(lerpDuration,null));
     }
     
     public void Destroy()
@@ -31,7 +31,7 @@ public class Heart : MonoBehaviour
         image.fillAmount = 0;
         while (image.fillAmount < 1)
         {
-            image.fillAmount += (1 / duration) * Time.deltaTime;
+            image.fillAmount = Mathf.MoveTowards(image.fillAmount, 1, duration * Time.deltaTime);
             yield return null;
         }
         image.fillAmount = 1;
@@ -52,9 +52,5 @@ public class Heart : MonoBehaviour
     private void AfterDestroy()
     {
         Destroy(gameObject);
-    }
-    private void AfterInit()
-    {
-
     }
 }

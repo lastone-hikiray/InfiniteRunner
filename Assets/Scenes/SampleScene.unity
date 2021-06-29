@@ -1302,10 +1302,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startDelay: 1
   spawnDelay: 1.4
-  enemyPrefabs:
+  enemiesPrefab:
   - {fileID: 1878207301215401321, guid: 29c4a89832bdd234c8e87480161fa7c6, type: 3}
-  - {fileID: 1878207301215401321, guid: 8432cb43289998240acba0deaf81dd5a, type: 3}
   - {fileID: 1878207301215401321, guid: 74a14a57d5418bc4fb33c051978a0d0b, type: 3}
+  - {fileID: 1878207301215401321, guid: 8432cb43289998240acba0deaf81dd5a, type: 3}
 --- !u!114 &777631893
 MonoBehaviour:
   m_ObjectHideFlags: 0

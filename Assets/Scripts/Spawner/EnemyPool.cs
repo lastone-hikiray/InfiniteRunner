@@ -5,30 +5,44 @@ using System.Linq;
 
 public class EnemyPool : MonoBehaviour
 {
-    private List<Enemy> enemies = new List<Enemy>(); 
+    private List<Enemy> unusedEnemies = new List<Enemy>(); 
+    
     public Enemy GetEnemy(Enemy original, Vector3 position, Quaternion rotation)
     {
-        if (TryGetUnused(original, out Enemy notUsedEnemy))
+        if (TryGetUnused(original, out Enemy unusedEnemy))
         {
-            notUsedEnemy.transform.position = position;
-            notUsedEnemy.transform.rotation = rotation;
-            notUsedEnemy.gameObject.SetActive(true);
-            return notUsedEnemy;
+            unusedEnemy.transform.position = position;
+            unusedEnemy.transform.rotation = rotation;
+            unusedEnemy.gameObject.SetActive(true);
+            unusedEnemy.Died += OnEnemyDie;
+            return unusedEnemy;
         }
         else
         {
             return GetNewEnemy(original, position, rotation);
         }
     }
-    private bool TryGetUnused(Enemy reference, out Enemy notUsedEnemy)
+    private bool TryGetUnused(Enemy reference, out Enemy unusedEnemy)
     {
-        notUsedEnemy = enemies.FirstOrDefault(e => e.gameObject.activeSelf == false && e.IsIdentical(reference));
-        return notUsedEnemy != null;
+        unusedEnemy = unusedEnemies.FirstOrDefault(e => reference.Equals(e));
+        bool have = unusedEnemy != null;
+        if (have)
+        {
+            unusedEnemies.Remove(unusedEnemy);
+        }
+        return have;
     }
     private Enemy GetNewEnemy(Enemy original, Vector3 position, Quaternion rotation)
     {
         Enemy newEnemy = Instantiate(original, position, rotation);
-        enemies.Add(newEnemy);
+        newEnemy.Died += OnEnemyDie;
         return newEnemy;
+    }
+
+    private void OnEnemyDie(Enemy enemy)
+    {
+        enemy.Died -= OnEnemyDie;
+        enemy.gameObject.SetActive(false);
+        unusedEnemies.Add(enemy);
     }
 }

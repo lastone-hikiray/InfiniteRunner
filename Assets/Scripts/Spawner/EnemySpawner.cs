@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private float startDelay;
     [SerializeField] private float spawnDelay;
-    [SerializeField] private Enemy[] enemyPrefabs;
+    [SerializeField] private Enemy[] enemiesPrefab;
 
     private Vector3[] spawnPoints;
     private Coroutine spawnCoroutine;
@@ -29,7 +29,9 @@ public class EnemySpawner : MonoBehaviour
     public void StartSpawn()
     {
         if (spawnCoroutine == null)
-            spawnCoroutine = StartCoroutine(SpawnEmemys());        
+        {
+            spawnCoroutine = StartCoroutine(SpawnEmemies());        
+        }
     }
     public void StopSpawn()
     {
@@ -40,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
         }
         
     }
-    private IEnumerator SpawnEmemys()
+    private IEnumerator SpawnEmemies()
     {
         WaitForSeconds waitForSeconds = new WaitForSeconds(spawnDelay);
         yield return new WaitForSeconds(startDelay);
@@ -56,8 +58,8 @@ public class EnemySpawner : MonoBehaviour
     }
     private Enemy GetRandomPrefab()
     {
-        int prefabNumber = Random.Range(0, enemyPrefabs.Length);
-        return enemyPrefabs[prefabNumber];
+        int prefabNumber = Random.Range(0, enemiesPrefab.Length);
+        return enemiesPrefab[prefabNumber];
     }
     private Vector3 GetRandomPoint()
     {

@@ -14,11 +14,7 @@ public class PlayerInput : MonoBehaviour
     }
     private void Update()
     {
-#if UNITY_STANDALONE_WIN
-
         float translation = Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime;
         playerMover.TryMoveY(translation);
-
-#endif
     }
 }

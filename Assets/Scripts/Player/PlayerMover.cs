@@ -6,8 +6,8 @@ using UnityEngine.Serialization;
 
 public class PlayerMover : MonoBehaviour
 {
-    public event UnityAction Move;
-    public event UnityAction Stay;
+    public event UnityAction OnMove;
+    public event UnityAction OnStay;
 
     [SerializeField] private float minHeight;
     [SerializeField] private float maxHeight;
@@ -18,21 +18,23 @@ public class PlayerMover : MonoBehaviour
     {
         cachedTransform = this.transform;
     }
+
     public bool TryMoveY(float translation)
     {
-        bool canMove = CanDoMove(translation);
+        bool canMove = CanMove(translation);
         if (canMove)
         {
             MoveY(translation);
-            Move?.Invoke();
+            OnMove?.Invoke();
         }
         else
         {
-            Stay?.Invoke();
+            OnStay?.Invoke();
         }
         return canMove;
     }
-    private bool CanDoMove(float translation)
+
+    private bool CanMove(float translation)
     {
         if (translation == 0)
             return false;
@@ -40,6 +42,7 @@ public class PlayerMover : MonoBehaviour
         bool canMove = nextPositionY < maxHeight && nextPositionY > minHeight;
         return canMove;
     }
+
     private void MoveY(float translation)
     {
         Vector3 moveStep = new Vector3(0, translation, 0);
