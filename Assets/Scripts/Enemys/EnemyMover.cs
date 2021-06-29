@@ -6,8 +6,14 @@ public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float speed;
 
+    private Transform cachedTransform;
+
+    private void Start()
+    {
+        cachedTransform = this.transform;
+    }
     private void Update()
     {
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        cachedTransform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 }

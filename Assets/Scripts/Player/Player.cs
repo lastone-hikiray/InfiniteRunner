@@ -10,12 +10,17 @@ public class Player : MonoBehaviour
 
     public event UnityAction<int> HealthChanged;
     public event UnityAction Died;
+
+    private bool Dead;
+
     private void Start()
     {
         HealthChanged?.Invoke(health);
     }
     public void ApplyDamage(int damage)
     {
+        if (Dead)
+            return;
         health -= damage;
         health = Math.Max(health, 0);
         HealthChanged?.Invoke(health);
@@ -24,6 +29,7 @@ public class Player : MonoBehaviour
     }
     private void Die()
     {
+        Dead = true;
         Died?.Invoke();
     }
 

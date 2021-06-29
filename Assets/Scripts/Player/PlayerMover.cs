@@ -12,6 +12,12 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float minHeight;
     [SerializeField] private float maxHeight;
 
+    private Transform cachedTransform;
+
+    private void Awake()
+    {
+        cachedTransform = this.transform;
+    }
     public bool TryMoveY(float translation)
     {
         bool canMove = CanDoMove(translation);
@@ -30,13 +36,13 @@ public class PlayerMover : MonoBehaviour
     {
         if (translation == 0)
             return false;
-        float nextPositionY = translation + this.transform.position.y;
+        float nextPositionY = translation + cachedTransform.position.y;
         bool canMove = nextPositionY < maxHeight && nextPositionY > minHeight;
         return canMove;
     }
     private void MoveY(float translation)
     {
         Vector3 moveStep = new Vector3(0, translation, 0);
-        transform.Translate(moveStep);
+        cachedTransform.Translate(moveStep);
     }
 }

@@ -8,8 +8,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Player player;
-        if (collision.gameObject.TryGetComponent(out player))
+        if (collision.gameObject.TryGetComponent(out Player player))
         {
             player.ApplyDamage(damage);
         }
@@ -21,12 +20,11 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public override bool Equals(object other)
+    public bool IsIdentical(Enemy other)
     {
-        Enemy otherEnemy = other as Enemy;
-        if (otherEnemy == null)
+        if (other == null)
             return false;
-        return otherEnemy.damage == damage;
+        return other.damage == damage;
         
     }
 }

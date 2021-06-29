@@ -42,17 +42,19 @@ public class HealthBar : MonoBehaviour
             }
         }
     }
-    private void RemoveHeart()
-    {
-        Heart heart = hearts[hearts.Count - 1];
-        hearts.Remove(heart);
-        heart.Destroy();
-    }
+    
     private void CreateHeart()
     {
         Heart newHeart = Instantiate(heartTemplate, this.transform);
         hearts.Add(newHeart);
         newHeart.Init();
+    }
+
+    private void RemoveHeart()
+    {
+        Heart heart = hearts[hearts.Count - 1];
+        hearts.Remove(heart);
+        heart.Destroy();
     }
 
 }

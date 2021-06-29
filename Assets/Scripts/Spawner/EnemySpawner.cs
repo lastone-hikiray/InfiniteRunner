@@ -46,20 +46,20 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(startDelay);
         while (true)
         {
-            Vector3 spawnPosition = GetSpawnPoint();
-            Enemy prefab = GetEnemyPrefab();
-            Enemy newEnemy = enemyPool.GetEnemy(prefab, spawnPosition, Quaternion.identity);
+            Vector3 spawnPosition = GetRandomPoint();
+            Enemy prefab = GetRandomPrefab();
+            enemyPool.GetEnemy(prefab, spawnPosition, Quaternion.identity);
 
             yield return waitForSeconds;
         }
 
     }
-    private Enemy GetEnemyPrefab()
+    private Enemy GetRandomPrefab()
     {
         int prefabNumber = Random.Range(0, enemyPrefabs.Length);
         return enemyPrefabs[prefabNumber];
     }
-    private Vector3 GetSpawnPoint()
+    private Vector3 GetRandomPoint()
     {
         int spawnPointNumber = Random.Range(0, spawnPoints.Length);
         return spawnPoints[spawnPointNumber];
